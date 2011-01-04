@@ -40,14 +40,10 @@ def dbExecute(db, query):
 
 
 def makeTable(rows):
-        def makeCol(col):
-                return "  <td>%s</td>\n" % str(col)
         def makeRow(row):
-                return ''.join(["<tr>\n", ''.join([makeCol(col) for col in row]), "</tr>\n"])
-        def makeHeader(field):
-                return "<th>%s</th>\n" % (str(field))
+                return ''.join(['<tr>\n', ''.join(['  <td>%s</td>\n' % str(col) for col in row]), '</tr>\n'])
 
-        header = ''.join([makeHeader(field[0]) for field in rows.description])
+        header = ''.join(['<th>%s</th>\n' % (field[0]) for field in rows.description])
         output = ''.join([makeRow(row) for row in rows.fetchall()])
         return "%s%s" %(header, output)
 
