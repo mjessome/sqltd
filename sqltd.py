@@ -5,21 +5,24 @@ import sys
 import re
 
 def runPage(db, html):
-        query = False
+        def parseStrings(s, query=[False]):
+                output = ''
+                if s == '<sql>':
+                        query[0] = True
+                elif s == '</sql>':
+                        query[0] = False
+                elif query[0]:
+                        result = dbExecute(db, s)
+                        output = ''.join(makeTable(result))
+                else:
+                        output = ''.join(s)
+                return output
+
         split = re.split('(<sql>|</sql>)', html)
 
-        for s in split:
-                if s == '<sql>':
-                        query = True
-                elif s == '</sql>':
-                        query = False
-                elif query:
-                        result = dbExecute(db, s).fetchall()
-                        print makeTable(result),
-                else:
-                        print s,
-        
-        return output
+        output = ''
+
+        return ''.join([parseStrings(s) for s in split])
 
 
 def dbConnect(db_path):
@@ -34,6 +37,16 @@ def dbExecute(db, query):
         c.execute(query)
 
         return c
+
+
+def makeTable(rows):
+        def makeCol(col):
+                return ''.join(["  <td>", str(col), "</td>\n"])
+        def makeRow(row):
+                return ''.join(["<tr>\n", ''.join([makeCol(col) for col in row]), "</tr>\n"])
+        
+        output = ''.join([makeRow(row) for row in rows.fetchall()])
+        return output
 
 if __name__ == "__main__":
         if len(sys.argv) >= 2:
