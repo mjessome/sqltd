@@ -13,7 +13,7 @@ def runPage(db, html):
                         query[0] = False
                 elif query[0]:
                         result = dbExecute(db, s)
-                        output = ''.join(makeTable(result))
+                        output = '<table>%s</table>' % (''.join(makeTable(result)))
                 else:
                         output = ''.join(s)
                 return output
@@ -46,7 +46,7 @@ def makeTable(rows):
                 return ''.join(["<tr>\n", ''.join([makeCol(col) for col in row]), "</tr>\n"])
         
         output = ''.join([makeRow(row) for row in rows.fetchall()])
-        return output
+        return "%s" %(output)
 
 if __name__ == "__main__":
         if len(sys.argv) >= 2:
