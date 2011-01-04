@@ -13,7 +13,7 @@ def runPage(db, html):
                         query[0] = False
                 elif query[0]:
                         result = dbExecute(db, s)
-                        output = '<table>%s</table>' % (''.join(makeTable(result)))
+                        output = '<table>\n%s</table>\n' % (''.join(makeTable(result)))
                 else:
                         output = ''.join(s)
                 return output
