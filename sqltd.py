@@ -41,12 +41,15 @@ def dbExecute(db, query):
 
 def makeTable(rows):
         def makeCol(col):
-                return ''.join(["  <td>", str(col), "</td>\n"])
+                return "  <td>%s</td>\n" % str(col)
         def makeRow(row):
                 return ''.join(["<tr>\n", ''.join([makeCol(col) for col in row]), "</tr>\n"])
-        
+        def makeHeader(field):
+                return "<th>%s</th>\n" % (str(field))
+
+        header = ''.join([makeHeader(field[0]) for field in rows.description])
         output = ''.join([makeRow(row) for row in rows.fetchall()])
-        return output
+        return "%s%s" %(header, output)
 
 if __name__ == "__main__":
         if len(sys.argv) >= 2:
