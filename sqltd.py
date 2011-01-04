@@ -46,7 +46,7 @@ def makeTable(rows):
                 return ''.join(["<tr>\n", ''.join([makeCol(col) for col in row]), "</tr>\n"])
         
         output = ''.join([makeRow(row) for row in rows.fetchall()])
-        return "%s" %(output)
+        return output
 
 if __name__ == "__main__":
         if len(sys.argv) >= 2:
