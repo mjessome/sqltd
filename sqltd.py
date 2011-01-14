@@ -43,7 +43,7 @@ def makeTable(rows):
 
         header = ''.join(['<th>%s</th>\n' % (field[0]) for field in rows.description])
         output = ''.join([makeRow(row) for row in rows.fetchall()])
-        return "%s%s" %(header, output)
+        return "<tr>%s</tr>%s" %(header, output)
 
 if __name__ == "__main__":
         if len(sys.argv) >= 2:
