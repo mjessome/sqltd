@@ -20,8 +20,6 @@ def runPage(db, html):
 
         split = re.split('(<sql>|</sql>)', html)
 
-        output = ''
-
         return ''.join([parseStrings(s) for s in split])
 
 
