@@ -49,13 +49,13 @@ if __name__ == "__main__":
         if len(sys.argv) >= 2:
                 DB_PATH = sys.argv[1];
         else:
-                print "No sqlite database specified."
+                print("No sqlite database specified.")
                 exit(1)
 
         db = dbConnect(DB_PATH)
         if(not db):
-                print "Error opening database"
+                print("Error opening database")
                 exit(1);
 
-        print runPage(db, ''.join(sys.stdin))
+        print(runPage(db, ''.join(sys.stdin)))
 
