@@ -3,7 +3,7 @@ sqltd v0.1
 About
 =====
 sqltd is a tool that is used for embedding an sqlite query into a webpage using
-<sql></sql> tags.
+<sql>QUERY</sql> tags.
 
 Requirements
 ============
