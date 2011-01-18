@@ -30,9 +30,12 @@ def dbConnect(db_path):
 
 
 def dbExecute(db, query):
-        #May need a way to check that the query is valid
         c = db.cursor()
-        c.execute(query)
+        try:
+                c.execute(query)
+        except sqlite3.OperationalError:
+                print("Invalid SQL syntax ", sys.exc_info()[1], file=sys.stderr)
+                exit(1)
 
         return c
 
